@@ -6,12 +6,12 @@
         <div class="col-8">
             <form class="row" method="post" enctype="multipart/form-data">
                 <div class="card">
-                    <p class="card-text">Действительно хотите удалить рассылку {{ object.name }}?</p>
+                    <p class="card-text">Действительно хотите удалить сообщение {{ object.subject }}?</p>
                     <div class="card-body">
                         {% csrf_token %}
                     </div>
-                    <button type="submit" class="btn btn-danger">Удалить рассылку</button>
-                    <a class="btn btn-primary" href="{% url 'mail:newsletter_list' %}" role="button">Отменить</a>
+                    <button type="submit" class="btn btn-danger">Удалить сообщение</button>
+                    <a class="btn btn-primary" href="{% url 'mail:message_list' %}" role="button">Отменить</a>
                 </div>
             </form>
         </div>
