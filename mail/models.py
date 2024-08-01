@@ -57,7 +57,7 @@ class Newsletter(models.Model):
         choices=status_choices,
     )
     clients = models.ManyToManyField(
-        Client, verbose_name="Клиенты", related_name="clients"
+        Client, verbose_name="Клиенты", related_name="clients", blank=True
     )
     message = models.OneToOneField(
         "Message",
