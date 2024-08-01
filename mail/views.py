@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from mail.models import Newsletter, Message
+from mail.models import Newsletter, Message, Client
 
 
 def home(request):
@@ -57,3 +57,28 @@ class MessageUpdateView(UpdateView):
 class MessageDeleteView(DeleteView):
     model = Message
     success_url = reverse_lazy('mail:message_list')
+
+
+class ClientListView(ListView):
+    model = Client
+
+
+class ClientCreateView(CreateView):
+    model = Client
+    fields = '__all__'
+    success_url = reverse_lazy('mail:client_list')
+
+
+class ClientDetailView(DetailView):
+    model = Client
+
+
+class ClientUpdateView(UpdateView):
+    model = Client
+    fields = '__all__'
+    success_url = reverse_lazy('mail:client_list')
+
+
+class ClientDeleteView(DeleteView):
+    model = Client
+    success_url = reverse_lazy('mail:client_list')

@@ -1,7 +1,8 @@
 from django.urls import path
 from mail.apps import MailConfig
 from mail.views import home, NewsletterDeleteView, MessageCreateView, MessageListView, MessageDetailView, \
-    MessageUpdateView, MessageDeleteView
+    MessageUpdateView, MessageDeleteView, ClientListView, ClientDetailView, ClientUpdateView, ClientCreateView, \
+    ClientDeleteView
 from mail.views import NewsletterListView, NewsletterDetailView, NewsletterCreateView, NewsletterUpdateView
 
 app_name = MailConfig.name
@@ -22,6 +23,13 @@ urlpatterns = [
     path('message/<int:pk>/', MessageDetailView.as_view(), name='message_detail'),
     path('message/<int:pk>/update', MessageUpdateView.as_view(), name='message_update'),
     path('message/<int:pk>/delete/', MessageDeleteView.as_view(), name='message_delete'),
+
+    # Клиенты
+    path('client/', ClientListView.as_view(), name='client_list'),
+    path('client/create', ClientCreateView.as_view(), name='client_create'),
+    path('client/<int:pk>/delete/', ClientDeleteView.as_view(), name='client_delete'),
+    path('client/<int:pk>/', ClientDetailView.as_view(), name='client_detail'),
+    path('client/<int:pk>/update', ClientUpdateView.as_view(), name='client_update')
 ]
 
 # from django.urls import reverse_lazy, reverse
