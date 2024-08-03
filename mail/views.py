@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+from mail.forms import NewsletterForm, MessageForm, ClientForm
 from mail.models import Newsletter, Message, Client
 
 
@@ -20,13 +21,21 @@ class NewsletterDetailView(DetailView):
 
 class NewsletterCreateView(CreateView):
     model = Newsletter
-    fields = '__all__'
+    form_class = NewsletterForm
     success_url = reverse_lazy('mail:newsletter_list')
+
+    def form_valid(self, form):
+        newsletter = form.save()
+        user = self.request.user
+        newsletter.owner = user
+        newsletter.save()
+
+        return super().form_valid(form)
 
 
 class NewsletterUpdateView(UpdateView):
     model = Newsletter
-    fields = '__all__'
+    form_class = NewsletterForm
     success_url = reverse_lazy('mail:newsletter_list')
 
 
@@ -37,7 +46,7 @@ class NewsletterDeleteView(DeleteView):
 
 class MessageCreateView(CreateView):
     model = Message
-    fields = '__all__'
+    form_class = MessageForm
     success_url = reverse_lazy('mail:newsletter_list')
 
 
@@ -51,7 +60,7 @@ class MessageDetailView(DetailView):
 
 class MessageUpdateView(UpdateView):
     model = Message
-    fields = '__all__'
+    form_class = Message
     success_url = reverse_lazy('mail:message_list')
 
 
@@ -66,7 +75,7 @@ class ClientListView(ListView):
 
 class ClientCreateView(CreateView, LoginRequiredMixin):
     model = Client
-    fields = '__all__'
+    form_class = ClientForm
     success_url = reverse_lazy('mail:client_list')
 
     def form_valid(self, form):
@@ -84,7 +93,7 @@ class ClientDetailView(DetailView):
 
 class ClientUpdateView(UpdateView):
     model = Client
-    fields = '__all__'
+    form_class = Client
     success_url = reverse_lazy('mail:client_list')
 
 
