@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models import SET_NULL
+
+from users.models import User
 
 NULLABLE = {"blank": True, "null": True}
 frequency_choices = (
@@ -30,6 +33,7 @@ class Client(models.Model):
         help_text="Введите комментарий к клиенту",
         **NULLABLE,
     )
+    owner = models.ForeignKey(User, verbose_name='Пользователь', **NULLABLE, on_delete=SET_NULL)
 
     def __str__(self):
         return f"{self.email} ({self.name})"
@@ -66,6 +70,7 @@ class Newsletter(models.Model):
         on_delete=models.SET_NULL,
         **NULLABLE,
     )
+    owner = models.ForeignKey(User, verbose_name='Пользователь', **NULLABLE, on_delete=SET_NULL)
 
     def __str__(self):
         return f"{self.name}"
@@ -78,6 +83,7 @@ class Newsletter(models.Model):
 class Message(models.Model):
     subject = models.CharField(max_length=100, verbose_name="Тема сообщения")
     text = models.TextField(verbose_name="Текст сообщения")
+    owner = models.ForeignKey(User, verbose_name='Пользователь', **NULLABLE, on_delete=SET_NULL)
 
     def __str__(self):
         return f"{self.subject}: {self.text}"

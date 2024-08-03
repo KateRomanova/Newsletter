@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -63,10 +64,18 @@ class ClientListView(ListView):
     model = Client
 
 
-class ClientCreateView(CreateView):
+class ClientCreateView(CreateView, LoginRequiredMixin):
     model = Client
     fields = '__all__'
     success_url = reverse_lazy('mail:client_list')
+
+    def form_valid(self, form):
+        client = form.save()
+        user = self.request.user
+        client.owner = user
+        client.save()
+
+        return super().form_valid(form)
 
 
 class ClientDetailView(DetailView):
