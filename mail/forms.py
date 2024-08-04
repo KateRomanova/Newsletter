@@ -9,6 +9,12 @@ class NewsletterForm(ModelForm):
         exclude = ('owner',)
 
 
+class NewsletterModeratorForm(ModelForm):
+    class Meta:
+        model = Newsletter
+        fields = ('is_active', 'owner',)
+
+
 class MessageForm(ModelForm):
     class Meta:
         model = Message

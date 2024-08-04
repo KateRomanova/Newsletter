@@ -70,7 +70,8 @@ class Newsletter(models.Model):
         on_delete=models.SET_NULL,
         **NULLABLE,
     )
-    owner = models.ForeignKey(User, verbose_name='Пользователь', **NULLABLE, on_delete=SET_NULL)
+    owner = models.ForeignKey(User, verbose_name='Пользователь', **NULLABLE, on_delete=SET_NULL, default=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -78,6 +79,10 @@ class Newsletter(models.Model):
     class Meta:
         verbose_name = "Рассылка"
         verbose_name_plural = "Рассылки"
+        permissions = [('can_block_newsletter', 'Can block newsletter'),
+                       ('can_view_newsletter', 'Can view newsletter'),
+                       ('can_view_user', 'Can view user'),
+                       ('can_block_user', 'Can block user')]
 
 
 class Message(models.Model):
