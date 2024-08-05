@@ -18,6 +18,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mail',
     'users',
+    'django_crontab',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -90,8 +92,8 @@ STATICFILES_DIRS = (BASE_DIR / 'static',)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -108,3 +110,7 @@ EMAIL_USE_SSL = True
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+CRONJOBS = [
+    ('*/1 * * * *', 'mail.cron.scheduled_mailing')
+]
