@@ -10,5 +10,5 @@ class BlogAdmin(admin.ModelAdmin):
 
 def my_media(data):
     if data:
-        return f'/media/blog/photo/{data}'
-    return f'/media/blog/photo/empty.pic.jpg'
+        return f'media/blog/photo/{data}'
+    return f'media/blog/photo/empty.pic.jpg'

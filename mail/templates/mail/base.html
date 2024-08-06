@@ -130,7 +130,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          {% if user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'mail:newsletter_list' %}">Рассылки</a>
           </li>
@@ -146,7 +145,6 @@
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'users:user_list' %}">Список пользователей</a>
           </li>
-          {% else %}
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'users:login' %}">Вход для пользователей</a>
           </li>
@@ -156,7 +154,6 @@
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'blog:list' %}">Блог</a>
           </li>
-          {% endif %}
         </ul>
       </div>
     </div>
