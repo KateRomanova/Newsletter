@@ -1,1 +1,43 @@
-[{"model": "mail.client", "pk": 1, "fields": {"email": "kate.romanova@gmail.com", "name": "Kate", "comment": "постоянный клиент"}}, {"model": "mail.client", "pk": 2, "fields": {"email": "rtvlad@gmail.com", "name": "Vlad", "comment": "новый клиент"}}, {"model": "mail.newsletter", "pk": 1, "fields": {"name": "Рассылка новогодняя", "start_date": "2024-07-29", "frequency": "Ежедневно", "status": "Создана", "message": 1, "clients": [1, 2]}}, {"model": "mail.message", "pk": 1, "fields": {"subject": "Новый год", "text": "Поздравляем с Наступающим. Приглашаем к нам за подарками"}}]
+[
+  {
+    "model": "mail.client",
+    "pk": 1,
+    "fields": {
+      "email": "kate.romanova@gmail.com",
+      "name": "Kate",
+      "comment": "постоянный клиент"
+    }
+  },
+  {
+    "model": "mail.client",
+    "pk": 2,
+    "fields": {
+      "email": "rtvlad@gmail.com",
+      "name": "Vlad",
+      "comment": "новый клиент"
+    }
+  },
+  {
+    "model": "mail.newsletter",
+    "pk": 1,
+    "fields": {
+      "name": "Рассылка новогодняя",
+      "start_date": "2024-07-29",
+      "frequency": "Ежедневно",
+      "status": "Создана",
+      "message": 1,
+      "clients": [
+        1,
+        2
+      ]
+    }
+  },
+  {
+    "model": "mail.message",
+    "pk": 1,
+    "fields": {
+      "subject": "Новый год",
+      "text": "Поздравляем с Наступающим. Приглашаем к нам за подарками"
+    }
+  }
+]

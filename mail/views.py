@@ -7,11 +7,15 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from mail.forms import NewsletterForm, MessageForm, ClientForm, NewsletterModeratorForm
 from mail.models import Newsletter, Message, Client
+from mail.services import get_three_articles
 
 
-@login_required
 def home(request):
-    return render(request, 'home.html')
+    context = {'count_newsletters': Newsletter.objects.all().count(),
+               'active_count_newsletters': Newsletter.objects.filter(is_active=True).count(),
+               'count_clients': Client.objects.all().count(), 'blogs': get_three_articles()}
+
+    return render(request, 'home.html', context=context)
 
 
 class NewsletterListView(LoginRequiredMixin, ListView, UserPassesTestMixin):
@@ -90,6 +94,13 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
 class MessageListView(LoginRequiredMixin, ListView):
     model = Message
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_superuser:
+            return Message.objects.all()
+        else:
+            return Message.objects.filter(owner=user)
+
 
 class MessageDetailView(LoginRequiredMixin, DetailView):
     model = Message
@@ -108,6 +119,13 @@ class MessageDeleteView(LoginRequiredMixin, DeleteView):
 
 class ClientListView(LoginRequiredMixin, ListView):
     model = Client
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_superuser:
+            return Client.objects.all()
+        else:
+            return Client.objects.filter(owner=user)
 
 
 class ClientCreateView(CreateView, LoginRequiredMixin):

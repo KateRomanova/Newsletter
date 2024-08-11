@@ -5,69 +5,64 @@
 
 <main>
 
-  <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <div class="container">
-          <div class="carousel-caption text-start">
-            <h1>Служба Рассылок</h1>
-            <p class="opacity-75">Создавайте рассылки для Ваших клиентов</p>
-    <div class="card-body">
-      <table class="table table-striped">
-        <tr>
-          <th scope="col">Всего Рассылок</th>
-          <th scope="col">Активные Рассылки</th>
-          <th scope="col">Уникальные Клиенты</th>
-        </tr>
-        <tr>
-          <td>1,200</td>
-          <td>900</td>
-          <td>800</td>
-        </tr>
-      </table>
-    </div>          </div>
+    <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                     aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"/>
+                </svg>
+                <div class="container">
+                    <div class="carousel-caption text-start">
+                        <h1>Служба Рассылок</h1>
+                        <p class="opacity-75">Создавайте рассылки для Ваших клиентов</p>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th scope="col">Всего Рассылок</th>
+                                    <th scope="col">Активные Рассылки</th>
+                                    <th scope="col">Уникальные Клиенты</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ count_newsletters }}</td>
+                                    <td>{{ active_count_newsletters }}</td>
+                                    <td>{{ count_clients }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
 
-  <!-- Marketing messaging and featurettes
-  ================================================== -->
-  <!-- Wrap the rest of the page in another container to center all the content. -->
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
 
-  <div class="container marketing">
+    <div class="container marketing">
 
-    <!-- Three columns of text below the carousel -->
-    <div class="row">
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <h2 class="fw-normal">Heading</h2>
-        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <h2 class="fw-normal">Heading</h2>
-        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-        <h2 class="fw-normal">Heading</h2>
-        <p>And lastly this, the third column of representative placeholder content.</p>
-        <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+            {% for blog in blogs %}
+            <div class="col-lg-4">
+                <h2 class="fw-normal">{{ blog.title }}</h2>
+                <p class="card-text">{{ blog.content }}</p>
+                <p class="card-text">Количество просмотров: {{ blog.views }}</p>
+                <p class="card-text">Дата публикации: {{ blog.publication_date }}</p>
+                <p><a class="btn btn-secondary" href="{% url 'blog:blog_detail' blog.pk %}">Подробнее &raquo;</a></p>
+
+            </div><!-- /.col-lg-4 -->
+            {% endfor %}
+        </div><!-- /.row -->
 
 
-
-  </div><!-- /.container -->
+    </div><!-- /.container -->
 
 </main>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
-    </body>
+</body>
 {% endblock %}
 
