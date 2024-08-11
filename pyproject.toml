@@ -12,6 +12,8 @@ black = "^24.4.2"
 django = "4.2.2"
 ipython = "^8.26.0"
 django-crontab = "^0.7.1"
+redis = "^5.0.8"
+python-dotenv = "^1.0.1"
 
 
 [build-system]

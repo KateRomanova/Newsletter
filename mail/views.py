@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from mail.forms import NewsletterForm, MessageForm, ClientForm, NewsletterModeratorForm
 from mail.models import Newsletter, Message, Client
-from mail.services import get_three_articles
+from mail.services import get_three_articles, get_blog_posts
 
 
 def home(request):
@@ -16,6 +16,10 @@ def home(request):
                'count_clients': Client.objects.all().count(), 'blogs': get_three_articles()}
 
     return render(request, 'home.html', context=context)
+
+
+def get_queryset(self):
+    return get_blog_posts()
 
 
 class NewsletterListView(LoginRequiredMixin, ListView, UserPassesTestMixin):
