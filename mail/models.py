@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import SET_NULL
+from django.utils.timezone import now
 
 from users.models import User
 
@@ -17,7 +18,6 @@ status_choices = (
 
 
 class Client(models.Model):
-
     email = models.EmailField(
         verbose_name="Email",
         help_text="Введите email клиента",
@@ -99,9 +99,8 @@ class Message(models.Model):
 
 
 class Attempt(models.Model):
-    date = models.DateTimeField(
-        auto_now_add=True, verbose_name="Дата и время последней рассылки"
-    )
+    start_date = models.DateTimeField(verbose_name="Дата и время начала рассылки", default=now)
+    end_date = models.DateTimeField(verbose_name="Дата и время окончания рассылки", **NULLABLE)
     mailing_status = models.BooleanField(
         default=False, verbose_name="Успешна ли попытка"
     )

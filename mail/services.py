@@ -12,10 +12,4 @@ def get_three_articles():
     return blog[:3]
 
 
-def get_clients(request, data):
-    """Получает количество клиентов"""
-    clients = Client.objects.all().count()
-
-    return {'clients': clients}
-
 
