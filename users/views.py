@@ -13,7 +13,7 @@ from users.models import User
 from config.settings import EMAIL_HOST_USER
 
 
-class UserCreateView(LoginRequiredMixin, CreateView):
+class UserCreateView(CreateView):
     model = User
     form_class = UserRegisterForm
     success_url = reverse_lazy('users:login')
